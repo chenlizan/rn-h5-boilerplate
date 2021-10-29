@@ -64,4 +64,7 @@ package-lock.json
 # WebStorm
 .idea
 
+# MacOS
+.DS_Store
+
 dll/
