@@ -1,4 +1,4 @@
-# react-boilerplate
+# rn-h5-boilerplate
 
 ## Getting Started
 
