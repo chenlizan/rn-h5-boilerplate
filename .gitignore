@@ -67,4 +67,6 @@ package-lock.json
 # MacOS
 .DS_Store
 
+# Build data
+disc/
 dll/
