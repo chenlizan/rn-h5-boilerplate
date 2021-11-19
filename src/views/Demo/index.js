@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Actions from "./action";
+import "./index.less";
 
 @connect(
   (state) => ({
@@ -20,7 +22,7 @@ class Demo extends React.Component {
 
   render() {
     const { receive } = this.props;
-    return <div style={{ position: "absolute", top: "50%", left: "50%", fontSize: 30 }}>Demo!&nbsp;{receive}</div>;
+    return <div className={classNames("demo")}>Demo!&nbsp;{receive}</div>;
   }
 }
 

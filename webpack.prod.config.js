@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const safePostCssParser = require("postcss-safe-parser");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
-const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const clientConfig = {
@@ -93,36 +92,6 @@ const clientConfig = {
       },
       {
         test: /\.css$/,
-        exclude: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: (resourcePath, context) => {
-                return path.relative(path.dirname(resourcePath), context) + "../../";
-              },
-            },
-          },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-            },
-          },
-          {
-            loader: require.resolve("postcss-loader"),
-            options: {
-              ident: "postcss",
-              plugins: [require("postcss-flexbugs-fixes"), require("autoprefixer")({ flexbox: "no-2009" })],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.css$/,
         include: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
         use: [
           {
@@ -135,46 +104,11 @@ const clientConfig = {
           },
           {
             loader: "css-loader",
-          },
-        ],
-      },
-      {
-        test: /\.less$/,
-        exclude: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: (resourcePath, context) => {
-                return path.relative(path.dirname(resourcePath), context) + "../../";
-              },
-            },
-          },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 2,
-              modules: {
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-            },
-          },
-          {
-            loader: require.resolve("postcss-loader"),
-            options: {
-              ident: "postcss",
-              plugins: [require("postcss-flexbugs-fixes"), require("autoprefixer")({ flexbox: "no-2009" })],
-            },
-          },
-          {
-            loader: "less-loader",
-            options: { javascriptEnabled: true },
           },
         ],
       },
       {
         test: /\.less/,
-        include: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,

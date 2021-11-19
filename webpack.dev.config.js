@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
-const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 
 const PORT = 4000;
@@ -59,62 +58,10 @@ const clientConfig = {
       },
       {
         test: /\.css$/,
-        exclude: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
-        use: [
-          { loader: "style-loader" },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-            },
-          },
-          {
-            loader: require.resolve("postcss-loader"),
-            options: {
-              ident: "postcss",
-              plugins: [require("postcss-flexbugs-fixes"), require("autoprefixer")({ flexbox: "no-2009" })],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.css$/,
-        include: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
         use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
-        test: /\.less$/,
-        exclude: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
-        use: [
-          { loader: "style-loader" },
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 2,
-              modules: {
-                getLocalIdent: getCSSModuleLocalIdent,
-              },
-            },
-          },
-          {
-            loader: require.resolve("postcss-loader"),
-            options: {
-              ident: "postcss",
-              plugins: [require("postcss-flexbugs-fixes"), require("autoprefixer")({ flexbox: "no-2009" })],
-            },
-          },
-          {
-            loader: "less-loader",
-            options: { javascriptEnabled: true },
-          },
-        ],
-      },
-      {
         test: /\.less/,
-        include: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "src/assets")],
         use: [
           { loader: "style-loader" },
           { loader: "css-loader" },
