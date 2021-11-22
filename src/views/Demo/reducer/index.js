@@ -1,15 +1,8 @@
 import { handleActions } from "redux-actions";
+import { initState as demo, reducers as DemoReducer } from "./DemoReducer";
 
 export const initState = {
-  receive: 0,
+  ...demo,
 };
 
-export const reducers = handleActions(
-  {
-    RECEIVE: (state, action) => ({
-      ...state,
-      receive: action.payload,
-    }),
-  },
-  initState
-);
+export const reducers = handleActions(Object.assign(DemoReducer), initState);
